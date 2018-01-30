@@ -1,11 +1,15 @@
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'dracula/vim' " color-scheme
-
+Plug 'reasonml-editor/vim-reason-plus'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'purescript-contrib/purescript-vim'
 Plug 'pangloss/vim-javascript'
-
+Plug 'autozimu/LanguageClient-neovim', {
+  \ 'branch': 'next',
+  \ 'do': 'bash install.sh',
+  \ }
+Plug 'roxma/nvim-completion-manager',
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown'] } " vim-prettier
@@ -28,3 +32,15 @@ color dracula
 
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.css,*.scss,*.less Prettier
+
+set hidden
+let g:LanguageClient_serverCommands = {
+  \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+  \ 'javascript': ['javascript-typescript-stdio'],
+  \ 'javascript.jsx': ['javascript-typescript-stdio'],
+  \ 'reason': ['ocaml-language-server', '--stdio']
+  \ }
+
+noremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+noremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+noremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
