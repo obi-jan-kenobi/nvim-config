@@ -5,6 +5,7 @@ Plug 'neovimhaskell/haskell-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'purescript-contrib/purescript-vim'
 Plug 'pangloss/vim-javascript'
+Plug 'derekwyatt/vim-scala'
 Plug 'autozimu/LanguageClient-neovim', {
   \ 'branch': 'next',
   \ 'do': 'bash install.sh',
@@ -38,7 +39,8 @@ let g:LanguageClient_serverCommands = {
   \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
   \ 'javascript': ['javascript-typescript-stdio'],
   \ 'javascript.jsx': ['javascript-typescript-stdio'],
-  \ 'reason': ['ocaml-language-server', '--stdio']
+  \ 'reason': ['ocaml-language-server', '--stdio'],
+  \ 'scala': ['metals-vim']
   \ }
 
 noremap <silent> K :call LanguageClient_textDocument_hover()<CR>
